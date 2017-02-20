@@ -25,7 +25,7 @@ int main() {
 
   // Call runCommand to get results
   string stuname = **uname;
-  cout << stuname;
+  //cout << stuname;
   string command = "ps -aef | grep " + stuname;
   string results = runCommand(command);
   cout << results;
@@ -41,7 +41,7 @@ string runCommand(string command) {
   string line,lines;
   // read child's stdout
   while (getline(proc.out(), line)) {
-    lines = lines + line + "<br />";
+    lines = lines + line + "<br />" ;
   }
 
   // read child's stderr
