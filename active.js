@@ -25,3 +25,13 @@ function getProcList () {
     }
     XMLHttp.send(null);
 }
+
+var intVar;
+function AutoRefresh() {
+
+    intVar = setInterval(function(){ getProcList()}, 1000);
+}
+
+function StopRefresh() {
+    clearInterval(intVar);
+}
