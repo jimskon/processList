@@ -29,7 +29,7 @@ function getProcList () {
 var intVar;
 function AutoRefresh() {
 
-    intVar = setInterval(function(){ getProcList()}, 1000);
+    intVar = setInterval(function(){ getProcList()}, 2000);
 }
 
 function StopRefresh() {
