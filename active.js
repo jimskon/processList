@@ -13,15 +13,14 @@ function getProcList () {
 
     var uname = document.getElementById('uname').value;
 
-    if (uname.length < 1) return;
-
+    if (uname.length < 0) return;
     XMLHttp.open("GET", "/cgi-bin/skon_activeClient.cgi?"
 		 + "uname=" + uname
 		 ,true);
     XMLHttp.onreadystatechange=function() {
-
-	document.getElementById('response_area').innerHTML = XMLHttp.responseText;;
-
+	if (XMLHttp.readyState == 4) {
+	    document.getElementById('response_area').innerHTML = XMLHttp.responseText;;
+	}
     }
     XMLHttp.send(null);
 }
