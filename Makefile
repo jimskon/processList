@@ -1,4 +1,4 @@
-#MakeFile to build and deploy the Sample US CENSUS Name Data using ajax
+#Makefile for a program to show actie processes
 # For CSC3004 Software Development
 
 # Put your user name below:
@@ -13,34 +13,34 @@ CFLAGS= -g
 
 RM= /bin/rm -f
 
-all: activeClient testClient PutCGI PutHTML
+all: processList testProcessList PutCGI PutHTML
 
-testClient.o: testClient.cpp fifo.h
-	$(CC) -c $(CFLAGS) testClient.cpp
+testProcessList.o: testProcessList.cpp pstream.h
+	$(CC) -c $(CFLAGS) testProcessList.cpp
 
-activeClient.o: activeClient.cpp fifo.h pstream.h
-	$(CC) -c $(CFLAGS) activeClient.cpp
+processList.o: processList.cpp pstream.h
+	$(CC) -c $(CFLAGS) processList.cpp
 
-testClient: testClient.o fifo.o
-	$(CC) testClient.o -o testClient
+testProcessList: testProcessList.o
+	$(CC) testProcessList.o -o testProcessList
 
-activeClient: activeClient.o 
-	$(CC) activeClient.o  -o activeClient -L/usr/local/lib -lcgicc
+processList: processList.o 
+	$(CC) processList.o  -o processList -L/usr/local/lib -lcgicc
 
-PutCGI: activeClient
-	chmod 757 activeClient
-	cp activeClient /usr/lib/cgi-bin/$(USER)_activeClient.cgi 
+PutCGI: processList
+	chmod 757 processList
+	cp processList /usr/lib/cgi-bin/$(USER)_processList.cgi 
 
 	echo "Current contents of your cgi-bin directory: "
 	ls -l /usr/lib/cgi-bin/
 
 PutHTML:
-	cp active.html /var/www/html/class/softdev/$(USER)
-	cp active.css /var/www/html/class/softdev/$(USER)
-	cp active.js /var/www/html/class/softdev/$(USER)
+	cp processList.html /var/www/html/class/softdev/$(USER)/processList/
+	cp processList.css /var/www/html/class/softdev/$(USER)/processList/
+	cp processList.js /var/www/html/class/softdev/$(USER)/processList/
 
 	echo "Current contents of your HTML directory: "
-	ls -l /var/www/html/class/softdev/$(USER)
+	ls -l /var/www/html/class/softdev/$(USER)/processList/
 
 clean:
-	rm -f *.o activeClient testServer
+	rm -f *.o testProcessList processList
